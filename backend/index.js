@@ -1,10 +1,15 @@
-import config from './config.js';
+const config = require('./config.js');
 
-import express from 'express';
+const express = require('express');
+const db = require('./models');
 
 
 const app = express();
 
-app.listen(config.port, () => {
-    console.log(`Server started on port ${config.port}.`);
+db.sequelize.sync().then(()=> {
+
+    app.listen(config.port, () => {
+        console.log(`Server started on port ${config.port}.`);
+    });
+
 });
