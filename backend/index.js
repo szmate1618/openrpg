@@ -1,10 +1,15 @@
 const config = require('./config.js');
 
 const express = require('express');
+const app = express();
+
+app.use(express.json());
+
 const db = require('./models');
 
-
-const app = express();
+//Routers
+const userRouter = require('./routes/Users');
+app.use('/users', userRouter);
 
 db.sequelize.sync().then(()=> {
 
